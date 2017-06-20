@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <!-- 使用 阿里的 druid 作为数据库连接数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+        <property name="filters" value="stat"/>
+        <!-- maxActive: 最大连接数量 -->
+        <property name="maxActive" value="200"/>
+        <!-- maxIdle: 初始化连接 -->
+        <property name="initialSize" value="50"/>
+        <!-- maxWait: 超时等待时间以毫秒为单位 1000等于60秒 -->
+        <property name="maxWait" value="60000"/>
+        <!-- minIdle: 最小空闲连接 -->
+        <property name="minIdle" value="1"/>
+        <!-- removeAbandoned: 是否自动回收超时连接 -->
+        <property name="removeAbandoned" value="true"/>
+        <!-- removeAbandonedTimeout: 超时时间(以秒数为单位) -->
+        <property name="removeAbandonedTimeout" value="10"/>
+        <!-- 在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位  -->
+        <property name="timeBetweenEvictionRunsMillis" value="3000"/>
+        <!-- 连接在池中保持空闲而不被空闲连接回收器线程 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="SELECT 1 from dual"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <property name="poolPreparedStatements" value="true"/>
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="75"/>
+    </bean>
+
+    <!-- 配置spring事务管理  -->
+    <bean id="transactionManager"
+          class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionTemplate"
+          class="org.springframework.transaction.support.TransactionTemplate">
+        <property name="transactionManager" ref="transactionManager"/>
+    </bean>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+</beans>
