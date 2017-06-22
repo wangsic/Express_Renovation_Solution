@@ -8,5 +8,5 @@
        default-autowire="byName">
 
     <bean id="faultSpaceAssembler" class="com.jzwy.zkx.product.biz.assembler.repair.FaultSpaceAssembler"/>
-
+    <bean id="faultCategoryAssembler" class="com.jzwy.zkx.product.biz.assembler.repair.FaultCategoryAssembler" />
 </beans>

@@ -13,5 +13,5 @@
     </bean>
 
     <bean id="faultSpaceDao" class="com.jzwy.zkx.product.biz.dao.repair.impl.FaultSpaceDaoImpl"/>
-
+    <bean id="faultCategoryDao" class="com.jzwy.zkx.product.biz.dao.repair.impl.FaultCategoryDaoImpl"/>
 </beans>

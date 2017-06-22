@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "mybatis-3-mapper.dtd" >
+<mapper namespace="FaultCategory">
+
+    <resultMap id="FaultCategoryResult"
+               type="com.jzwy.zkx.product.biz.domain.repair.FaultCategoryDO">
+        <result column="id" property="id" jdbcType="BIGINT" javaType="Long"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="creator_id" property="creatorId"/>
+        <result column="created_time" property="createdTime"/>
+        <result column="last_modifier_id" property="lastModifierId"/>
+        <result column="last_modified_time" property="lastModifiedTime"/>
+        <result column="deleted" property="isDeleted"/>
+    </resultMap>
+
+
+    <sql id="selectColumnList">
+        id
+        ,code
+        ,name
+        ,creator_id
+        ,created_time
+        ,last_modifier_id
+        ,last_modified_time
+        ,deleted
+    </sql>
+
+
+    <sql id="queryWhereSql">
+        where deleted=0
+        <if test="id != null">
+            AND id=#{id}
+        </if>
+        <if test="code != null">
+            AND code=#{code}
+        </if>
+        <if test="name != null">
+            AND name=#{name}
+        </if>
+    </sql>
+
+
+    <insert id="insert" parameterType="com.jzwy.zkx.product.biz.domain.repair.FaultCategoryDO">
+        insert into t_fault_category (
+        code
+        ,name
+        ,creator_id
+        ,created_time
+        ,last_modifier_id
+        ,last_modified_time
+        ,deleted
+        ) values (
+        <![CDATA[
+		    #{code}
+		   ,#{name}
+		   ,#{creatorId}
+		   ,now()
+		   ,#{lastModifierId}
+		   ,now()
+		   ,0
+		]]>
+        );
+        <selectKey keyProperty="id" resultType="long" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+    </insert>
+
+    <select id="queryById" resultMap="FaultCategoryResult" parameterType="java.lang.Long">
+        select
+        <include refid="selectColumnList"/>
+        from t_fault_category
+        where id = #{id}
+    </select>
+
+    <select id="query" resultMap="FaultCategoryResult"
+            parameterType="com.jzwy.zkx.product.service.repair.query.FaultCategoryQuery">
+        select
+        <include refid="selectColumnList" />
+        from t_fault_category
+        <include refid="queryWhereSql" />
+        limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="count" resultType="int"
+            parameterType="com.jzwy.zkx.product.service.repair.query.FaultCategoryQuery">
+        select
+        count(id)
+        from t_fault_category
+        <include refid="queryWhereSql" />
+    </select>
+
+
+
+</mapper>

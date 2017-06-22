@@ -9,11 +9,15 @@
 
     <!-- Service -->
     <bean id="faultSpaceService" class="com.jzwy.zkx.product.biz.service.repair.impl.FaultSpaceServiceImpl"/>
+    <bean id="faultCategoryService" class="com.jzwy.zkx.product.biz.service.repair.impl.FaultCategoryServiceImpl"/>
 
 
     <!-- Manager -->
     <bean id="faultSpaceManager" class="com.jzwy.zkx.product.biz.manager.repair.impl.FaultSpaceManagerImpl">
         <constructor-arg index="0" ref="faultSpaceDao"/>
+    </bean>
+    <bean id="faultCategoryManager" class="com.jzwy.zkx.product.biz.manager.repair.impl.FaultCategoryManagerImpl">
+        <constructor-arg index="0" ref="faultCategoryDao"/>
     </bean>
 
     <!-- Common -->

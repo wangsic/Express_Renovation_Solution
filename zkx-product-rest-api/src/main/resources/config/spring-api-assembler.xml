@@ -8,5 +8,6 @@
        default-autowire="byName">
 
     <bean id="faultSpaceVODTOAssembler" class="com.jzwy.zkx.product.rest.api.assembler.repair.FaultSpaceVODTOAssembler"/>
+    <bean id="faultCategoryVODTOAssembler" class="com.jzwy.zkx.product.rest.api.assembler.repair.FaultCategoryVODTOAssembler"/>
 
 </beans>
