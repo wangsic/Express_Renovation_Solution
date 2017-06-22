@@ -26,12 +26,12 @@ public class FaultCategoryAction extends BaseAction {
     private FaultCategoryService faultCategoryService;
 
     @Autowired
-    private VODTOAssembler<FaultCategoryVO,FaultCategoryDTO> faultCategoryVODTOAssembler;
+    private VODTOAssembler<FaultCategoryVO, FaultCategoryDTO> faultCategoryVODTOAssembler;
 
     @ResponseBody
     @RequestMapping(value = "/add", method = {RequestMethod.POST}, produces = "application/json; charset=utf-8")
     public Response<Void> add(@RequestBody FaultCategoryVO faultCategoryVO) {
-        try{
+        try {
             FaultCategoryDTO faultCategoryDTO = this.faultCategoryVODTOAssembler.voToDto(faultCategoryVO);
             Response<Void> result = faultCategoryService.add(faultCategoryDTO);
 
@@ -40,8 +40,7 @@ public class FaultCategoryAction extends BaseAction {
             }
             return newDataReturnJson(result.getData());
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             return newErrorReturnJson("添加故障类别操作操作失败");
         }
 
@@ -49,36 +48,33 @@ public class FaultCategoryAction extends BaseAction {
     }
 
     @ResponseBody
-    @RequestMapping(value="/detail" , produces = "application/json; charset=utf-8")
-    public Response detail(@RequestParam("id") Long id)
-    {
-        try{
+    @RequestMapping(value = "/detail", produces = "application/json; charset=utf-8")
+    public Response detail(@RequestParam("id") Long id) {
+        try {
             Response<FaultCategoryDTO> response = this.faultCategoryService.get(id);
-            FaultCategoryVO  faultCategoryVO= faultCategoryVODTOAssembler.dtoToVo(response.getData());
+            FaultCategoryVO faultCategoryVO = faultCategoryVODTOAssembler.dtoToVo(response.getData());
             return newDataReturnJson(faultCategoryVO);
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             return newErrorReturnJson("查询故障类别详情失败");
         }
     }
 
     @ResponseBody
-    @RequestMapping(value="/list", produces = "application/json; charset=utf-8")
+    @RequestMapping(value = "/list", produces = "application/json; charset=utf-8")
     public Response list(HttpServletRequest request) {
-        try{
+        try {
             FaultCategoryQuery query = new FaultCategoryQuery();
-            query.setCode(this.getString(request,"code",null));
-            query.setName(this.getString(request,"name",null));
-            query.setPageIndex(this.getInt(request,"pageIndex",null));
-            query.setPageSize(this.getInt(request,"pageSize",null));
+            query.setCode(this.getString(request, "code", null));
+            query.setName(this.getString(request, "name", null));
+            query.setPageIndex(this.getInt(request, "pageIndex", null));
+            query.setPageSize(this.getInt(request, "pageSize", null));
             PagedResultsResponse<FaultCategoryDTO> response = faultCategoryService.list(query);
             List<FaultCategoryVO> faultCategoryVOList = faultCategoryVODTOAssembler.dtoListToVoList(response.getData());
-            return newListReturnResponse(faultCategoryVOList,response.getPage());
-
-        }catch (Exception e) {
+            return newListReturnResponse(faultCategoryVOList, response.getPage());
+        } catch (Exception e) {
             return newErrorReturnJson("查询故障类别列表失败");
         }
-
     }
 
 
