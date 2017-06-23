@@ -6,7 +6,7 @@ import com.jzwy.zkx.product.service.repair.dto.FaultCategoryDTO;
 
 
 /**
- * Created by wangsic on 6/19/2017.
+ * FaultCategoryAssembler
  */
 public class FaultCategoryAssembler extends AbstractDTODOAssembler<FaultCategoryDTO, FaultCategoryDO> {
 }

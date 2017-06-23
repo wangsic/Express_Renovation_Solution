@@ -6,7 +6,7 @@ import com.jzwy.zkx.product.biz.domain.repair.FaultCategoryDO;
 import com.jzwy.zkx.product.service.repair.query.FaultCategoryQuery;
 
 /**
- * Created by wangsic on 6/21/2017.
+ * 故障类别数据访问实现
  */
 public class FaultCategoryDaoImpl  extends BaseDao<FaultCategoryDO, FaultCategoryQuery> implements FaultCategoryDao{
 }

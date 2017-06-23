@@ -3,7 +3,7 @@ package com.jzwy.zkx.product.rest.api.vo;
 import java.util.Date;
 
 /**
- * Created by wangsic on 6/19/2017.
+ * 故障类别VO
  */
 public class FaultCategoryVO {
 

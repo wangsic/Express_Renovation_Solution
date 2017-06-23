@@ -76,9 +76,9 @@
     <select id="query" resultMap="FaultCategoryResult"
             parameterType="com.jzwy.zkx.product.service.repair.query.FaultCategoryQuery">
         select
-        <include refid="selectColumnList" />
+        <include refid="selectColumnList"/>
         from t_fault_category
-        <include refid="queryWhereSql" />
+        <include refid="queryWhereSql"/>
         limit #{startIndex}, #{pageSize}
     </select>
 
@@ -87,9 +87,8 @@
         select
         count(id)
         from t_fault_category
-        <include refid="queryWhereSql" />
+        <include refid="queryWhereSql"/>
     </select>
-
 
 
 </mapper>
