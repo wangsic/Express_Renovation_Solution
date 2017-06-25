@@ -16,9 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 
-/**
- * Created by wangsic on 6/21/2017.
- */
 @Controller
 @RequestMapping(value = "/faultcategory")
 public class FaultCategoryAction extends BaseAction {
@@ -72,9 +69,11 @@ public class FaultCategoryAction extends BaseAction {
             PagedResultsResponse<FaultCategoryDTO> response = faultCategoryService.list(query);
             List<FaultCategoryVO> faultCategoryVOList = faultCategoryVODTOAssembler.dtoListToVoList(response.getData());
             return newListReturnResponse(faultCategoryVOList, response.getPage());
+
         } catch (Exception e) {
             return newErrorReturnJson("查询故障类别列表失败");
         }
+
     }
 
 

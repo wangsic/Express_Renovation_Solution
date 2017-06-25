@@ -11,9 +11,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Created by wangsic on 6/19/2017.
+ * FaultCategoryVODTOAssembler
  */
-public class FaultCategoryVODTOAssembler implements VODTOAssembler<FaultCategoryVO,FaultCategoryDTO> {
+public class FaultCategoryVODTOAssembler implements VODTOAssembler<FaultCategoryVO, FaultCategoryDTO> {
 
     @Override
     public FaultCategoryVO dtoToVo(FaultCategoryDTO dtoObject) throws Exception {

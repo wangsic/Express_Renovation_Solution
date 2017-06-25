@@ -7,7 +7,7 @@ import com.jzwy.zkx.product.service.repair.query.FaultCategoryQuery;
 
 
 /**
- * Created by wangsic on 6/19/2017.
+ * 故障类别维护服务接口
  */
 public interface FaultCategoryService {
 

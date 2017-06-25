@@ -11,11 +11,12 @@ import com.jzwy.zkx.product.service.repair.FaultCategoryService;
 import com.jzwy.zkx.product.service.repair.dto.FaultCategoryDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.jzwy.zkx.product.service.repair.query.FaultCategoryQuery;
+
 import java.util.List;
 
 
 /**
- * Created by wangsic on 6/19/2017.
+ * 故障类别服务实现
  */
 public class FaultCategoryServiceImpl implements FaultCategoryService {
 
@@ -23,15 +24,15 @@ public class FaultCategoryServiceImpl implements FaultCategoryService {
     private FaultCategoryManager faultCategoryManager;
 
     @Autowired
-    private DTODOAssembler<FaultCategoryDTO,FaultCategoryDO> FaultCategoryAssembler;
+    private DTODOAssembler<FaultCategoryDTO, FaultCategoryDO> FaultCategoryAssembler;
 
     @Override
     public Response<Void> add(FaultCategoryDTO faultCategory) throws Exception {
         FaultCategoryQuery faultCategoryQuery = new FaultCategoryQuery();
         faultCategoryQuery.setCode(faultCategory.getCode());
         boolean existing = this.faultCategoryManager.count(faultCategoryQuery) > 0;
-        if (existing){
-            return Response.writeError(String.format(MessageConstants.FAULT_CATEGORY_HAS_BEEN_EXISTING_MESSAGE,faultCategory.getCode()));
+        if (existing) {
+            return Response.writeError(String.format(MessageConstants.FAULT_CATEGORY_HAS_BEEN_EXISTING_MESSAGE, faultCategory.getCode()));
         }
         FaultCategoryDO faultCategoryDO = FaultCategoryAssembler.dtoToDo(faultCategory);
         this.faultCategoryManager.insert(faultCategoryDO);
@@ -50,9 +51,9 @@ public class FaultCategoryServiceImpl implements FaultCategoryService {
 
     @Override
     public Response<FaultCategoryDTO> get(Long id) throws Exception {
-       FaultCategoryDO faultCategoryDO = this.faultCategoryManager.queryById(id);
-       FaultCategoryDTO faultCategoryDTO = this.FaultCategoryAssembler.doToDto(faultCategoryDO);
-       return Response.writeSuccess(faultCategoryDTO);
+        FaultCategoryDO faultCategoryDO = this.faultCategoryManager.queryById(id);
+        FaultCategoryDTO faultCategoryDTO = this.FaultCategoryAssembler.doToDto(faultCategoryDO);
+        return Response.writeSuccess(faultCategoryDTO);
     }
 
     @Override
@@ -60,6 +61,6 @@ public class FaultCategoryServiceImpl implements FaultCategoryService {
         PagedResult<FaultCategoryDO> faultCategoryDOPagedResults = this.faultCategoryManager.query(query);
         List<FaultCategoryDO> faultCategoryDOList = faultCategoryDOPagedResults.getData();
         List<FaultCategoryDTO> faultCategoryDTOLis = this.FaultCategoryAssembler.doListToDtoList(faultCategoryDOList);
-        return PagedResultsResponse.writeSuccess(faultCategoryDTOLis,faultCategoryDOPagedResults.toPagination());
+        return PagedResultsResponse.writeSuccess(faultCategoryDTOLis, faultCategoryDOPagedResults.toPagination());
     }
 }

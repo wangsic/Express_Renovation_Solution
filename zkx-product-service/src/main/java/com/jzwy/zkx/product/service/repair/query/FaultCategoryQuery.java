@@ -3,7 +3,7 @@ package com.jzwy.zkx.product.service.repair.query;
 import com.jzwy.zkx.core.service.contract.BaseQuery;
 
 /**
- * Created by wangsic on 6/19/2017.
+ * 故障类别查询
  */
 public class FaultCategoryQuery extends BaseQuery {
 

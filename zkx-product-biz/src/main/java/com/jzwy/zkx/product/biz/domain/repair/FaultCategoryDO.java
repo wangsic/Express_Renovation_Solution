@@ -3,7 +3,7 @@ package com.jzwy.zkx.product.biz.domain.repair;
 import com.jzwy.zkx.core.domain.BaseDO;
 
 /**
- * 故障问题种类
+ * 故障种类
  */
 public class FaultCategoryDO extends BaseDO {
 

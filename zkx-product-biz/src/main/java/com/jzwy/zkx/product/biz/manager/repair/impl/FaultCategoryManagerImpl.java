@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
 /**
- * Created by wangsic on 6/21/2017.
+ * FaultCategoryManagerImpl
  */
 public class FaultCategoryManagerImpl extends BaseManager<FaultCategoryDO,FaultCategoryQuery> implements FaultCategoryManager{
 
